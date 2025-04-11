@@ -70,19 +70,18 @@ stdenv.mkDerivation rec {
     export ICON_DIR=$out/share/icons/hicolor
     mkdir -p $ICON_DIR
     cp ${./icon.png} $ICON_DIR/magicseteditor.png
+    cp -r ${desktopItem}/share $out
   '';
 
-  desktopItems = [
-      (makeDesktopItem {
-        name = "Magic Set Editor";
-        exec = "magicseteditor";
-        comment = meta.description;
-        desktopName = "Magic Set Editor";
-        genericName = "Magic Set Editor";
-        icon = "magicseteditor";
-        categories = [ "Game" ];
-      })
-    ];
+  desktopItem = makeDesktopItem {
+    name = "Magic Set Editor";
+    exec = "magicseteditor";
+    comment = meta.description;
+    desktopName = "Magic Set Editor";
+    genericName = "Magic Set Editor";
+    icon = "magicseteditor";
+    categories = [ "Game" ];
+  };
 
   passthru = {
     fonts = stdenvNoCC.mkDerivation {
