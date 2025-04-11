@@ -67,7 +67,7 @@ stdenv.mkDerivation rec {
     cp magicseteditor $out/bin/magicseteditor
     wrapProgram $out/bin/magicseteditor --set WX_MAGICSETEDITOR_DATA_DIR $out --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}"
 
-    export ICON_DIR=$out/share/icons/hicolor
+    export ICON_DIR=$out/share/icons/hicolor/32x32/apps
     mkdir -p $ICON_DIR
     cp ${./icon.png} $ICON_DIR/magicseteditor.png
     cp -r ${desktopItem}/share $out
