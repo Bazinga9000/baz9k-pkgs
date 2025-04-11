@@ -10,6 +10,7 @@
   wxGTK32,
   makeBinaryWrapper,
   gtk3,
+  makeDesktopItem,
 
   includeNonMagicTemplates ? false
 }:
@@ -65,7 +66,23 @@ stdenv.mkDerivation rec {
     cp -r $src/resource $out
     cp magicseteditor $out/bin/magicseteditor
     wrapProgram $out/bin/magicseteditor --set WX_MAGICSETEDITOR_DATA_DIR $out --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}"
+
+    export ICON_DIR=$out/share/icons/hicolor
+    mkdir -p $ICON_DIR
+    cp ${./icon.png} $ICON_DIR/magicseteditor.png
   '';
+
+  desktopItems = [
+      (makeDesktopItem {
+        name = "Magic Set Editor";
+        exec = "magicseteditor";
+        comment = meta.description;
+        desktopName = "Magic Set Editor";
+        genericName = "Magic Set Editor";
+        icon = "magicseteditor";
+        categories = [ "Game" ];
+      })
+    ];
 
   passthru = {
     fonts = stdenvNoCC.mkDerivation {
