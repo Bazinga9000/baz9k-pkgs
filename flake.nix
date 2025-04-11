@@ -18,6 +18,6 @@
         magicseteditor = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = false;};
         magicseteditor-allgames = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = true;};
       };
-    }
-  );
+    });
+  };
 }
