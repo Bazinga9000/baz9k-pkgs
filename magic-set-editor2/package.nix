@@ -20,10 +20,10 @@ stdenv.mkDerivation rec {
   version = "2.5.6";
 
   src = fetchFromGitHub {
-    owner = "haganbmj";
+    owner = "G-e-n-e-v-e-n-s-i-S";
     repo = "MagicSetEditor2";
-    rev = "v${version}";
-    hash = "sha256-LD2LVa/BAQ261IPJFaQIok3SutISDf7fbp32iDWynqY=";
+    rev = "5c8d4810660e3bc15bcf99011433029e89c91494";
+    hash = "sha256-sdhVATDGVetnZjTsIYZ4E5d9pTdDUR9Kfz/BjnkWb0c=";
   };
 
   magic_pack = fetchFromGitHub {
