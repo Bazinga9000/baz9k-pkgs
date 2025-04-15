@@ -107,8 +107,8 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "Magic Set Editor is a program for designing trading cards";
-    homepage = "https://github.com/haganbmj/MagicSetEditor2";
-    changelog = "https://github.com/haganbmj/MagicSetEditor2/blob/${src.rev}/CHANGES.md";
+    homepage = "https://github.com/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2";
+    changelog = "https://github.com/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2/blob/${src.rev}/CHANGES.md";
     license = lib.licenses.gpl2Only;
     maintainers = [ ];
     mainProgram = "magic-set-editor2";
