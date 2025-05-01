@@ -21,3 +21,9 @@ These fonts are:
 - Fairfax
 - Fairfax HD
 - Kreative Square
+
+### `cambridge`
+
+The block stacking game [Cambridge](https://github.com/cambridge-stacker/cambridge).
+
+Modpacks can be installed into `~/.local/share/love/cambridge/` as usual.
