@@ -19,6 +19,8 @@
         magicseteditor-allgames = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = true;};
 
         kreative-kore-fonts = prev.callPackage ./kreative-fonts/package.nix {};
+
+        cambridge = prev.callPackage ./cambridge/package.nix {};
       };
     });
   };
