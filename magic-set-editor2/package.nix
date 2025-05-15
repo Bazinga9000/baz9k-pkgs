@@ -17,20 +17,20 @@
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.6";
+  version = "2.5.8";
 
   src = fetchFromGitHub {
     owner = "G-e-n-e-v-e-n-s-i-S";
     repo = "MagicSetEditor2";
-    rev = "5c8d4810660e3bc15bcf99011433029e89c91494";
-    hash = "sha256-sdhVATDGVetnZjTsIYZ4E5d9pTdDUR9Kfz/BjnkWb0c=";
+    rev = "f220b900fa9be19e5dcfd97cb543bc502c3207be";
+    hash = "sha256-c9CStlZU5Qk5ZBHC72qHj+dR6tJYqTvQ0BxhKi9tT4g=";
   };
 
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "45f6116c3abeade7fdcc526b84e4dd0b845a5429";
-    hash = "sha256-fDPPSkZQ2X2qr9YU+xrC+3Y5tobBniXi1k8xItAzAjQ=";
+    rev = "8730408c4da1c7a03861501b1916ed100c53d9db";
+    hash = "sha256-Ge1Bst8qZebXCljA3xYQYph7APeWBZlqJwc995rdSYw=";
   };
 
   non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
@@ -71,6 +71,14 @@ stdenv.mkDerivation rec {
     mkdir -p $ICON_DIR
     cp ${./icon.png} $ICON_DIR/magicseteditor.png
     cp -r ${desktopItem}/share $out
+
+    mkdir -p $out/bin/Magic\ -\ Fonts
+    mkdir -p $TMPDIR/fonts
+    find $magic_pack/Magic\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
+    ${if includeNonMagicTemplates then ''
+      find $non_magic_pack/Other\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
+    '' else ""}
+    cp $TMPDIR/fonts/* $out/bin/Magic\ -\ Fonts
   '';
 
   desktopItem = makeDesktopItem {
@@ -81,28 +89,6 @@ stdenv.mkDerivation rec {
     genericName = "Magic Set Editor";
     icon = "magicseteditor";
     categories = [ "Game" ];
-  };
-
-  passthru = {
-    fonts = stdenvNoCC.mkDerivation {
-      src = magic_pack;
-      non_magic = non_magic_pack;
-
-      name = "mse-fonts";
-      dontConfigure = true;
-
-      installPhase = ''
-        mkdir -p $out/share/fonts
-        mkdir -p $TMPDIR/fonts
-        find $src/Magic\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
-        ${if includeNonMagicTemplates then ''
-          find $non_magic/Other\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
-        '' else ""}
-        cp $TMPDIR/fonts/* $out/share/fonts
-      '';
-
-      meta.description = "Required fonts for Magic Set Editor";
-    };
   };
 
   meta = {

@@ -15,8 +15,8 @@
   }: {
     overlays.default = (final: prev: {
       baz9k = {
-        magicseteditor = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = false;};
-        magicseteditor-allgames = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = true;};
+        magicseteditor = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = false;}
+        // { all = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = true;}; };
 
         kreative-kore-fonts = prev.callPackage ./kreative-fonts/package.nix {};
 
