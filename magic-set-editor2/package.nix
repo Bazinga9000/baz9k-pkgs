@@ -52,6 +52,11 @@ stdenv.mkDerivation rec {
     wxGTK32
   ];
 
+  patchPhase = ''
+    substituteInPlace src/data/font.cpp \
+      --replace-fail "fontsDirectoryPath = appPath + pathSeparator + fontsDirectoryPath + (fontsDirectoryPath.EndsWith(pathSeparator) ? \"\" : pathSeparator);" "fontsDirectoryPath = \"$out/mse-fonts/\";"
+  '';
+
   installPhase = ''
     mkdir -p $out/bin/
     mkdir -p $TMPDIR/data
@@ -72,13 +77,14 @@ stdenv.mkDerivation rec {
     cp ${./icon.png} $ICON_DIR/magicseteditor.png
     cp -r ${desktopItem}/share $out
 
-    mkdir -p $out/bin/Magic\ -\ Fonts
+    export FONT_DIR=$out/mse-fonts
+    mkdir -p $FONT_DIR
     mkdir -p $TMPDIR/fonts
     find $magic_pack/Magic\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
     ${if includeNonMagicTemplates then ''
       find $non_magic_pack/Other\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
     '' else ""}
-    cp $TMPDIR/fonts/* $out/bin/Magic\ -\ Fonts
+    cp $TMPDIR/fonts/* $FONT_DIR
   '';
 
   desktopItem = makeDesktopItem {
