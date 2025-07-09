@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  stdenvNoCC,
   fetchFromGitHub,
   cmake,
   pkg-config,
@@ -22,15 +21,15 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "G-e-n-e-v-e-n-s-i-S";
     repo = "MagicSetEditor2";
-    rev = "f220b900fa9be19e5dcfd97cb543bc502c3207be";
-    hash = "sha256-c9CStlZU5Qk5ZBHC72qHj+dR6tJYqTvQ0BxhKi9tT4g=";
+    rev = "026400a1e092eca2b98360398fa78a22f532b780";
+    hash = "sha256-JCX+2yEfut7zEgcr7ugfoal8vP3MeLiuxHhJ0Ihy9KU=";
   };
 
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "8730408c4da1c7a03861501b1916ed100c53d9db";
-    hash = "sha256-Ge1Bst8qZebXCljA3xYQYph7APeWBZlqJwc995rdSYw=";
+    rev = "add2e3b9796547c4cbe80e93965679cc484a7489";
+    hash = "sha256-Kh03WWNYJVBaByDarFmRqSyg0z1I3/d5Svwh9LLwuZE=";
   };
 
   non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
@@ -54,7 +53,7 @@ stdenv.mkDerivation rec {
 
   patchPhase = ''
     substituteInPlace src/data/font.cpp \
-      --replace-fail "fontsDirectoryPath = appPath + pathSeparator + fontsDirectoryPath + (fontsDirectoryPath.EndsWith(pathSeparator) ? \"\" : pathSeparator);" "fontsDirectoryPath = \"$out/mse-fonts/\";"
+      --replace-fail "fontsDirectoryPath = appPath + pathSeparator + fontsDirectoryPath + (fontsDirectoryPath.EndsWith(pathSeparator) ? wxString() : pathSeparator);" "fontsDirectoryPath = \"$out/mse-fonts/\";"
   '';
 
   installPhase = ''
