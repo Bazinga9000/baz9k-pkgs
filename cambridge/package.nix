@@ -5,7 +5,7 @@
   love,
   zip,
   runtimeShell,
-  makeDesktopItem
+  makeDesktopItem,
 }:
 
 stdenv.mkDerivation rec {
@@ -34,24 +34,27 @@ stdenv.mkDerivation rec {
     categories = [ "Game" ];
   };
 
-  installPhase = let runScript = ''
-    #!${runtimeShell}
-    love $out/cambridge.love
-  ''; in
-  ''
-    mkdir -p $out/bin
-    cd $src
-    zip -r $out/cambridge.love libs load res scene tetris conf.lua main.lua scene.lua funcs.lua
-    mkdir -p $out/libs
-    cp -r $src/libs/discord-rpc.* $out/libs
-    echo -n "${runScript}" > $out/bin/cambridge
-    chmod +x $out/bin/cambridge
+  installPhase =
+    let
+      runScript = ''
+        #!${runtimeShell}
+        love $out/cambridge.love
+      '';
+    in
+    ''
+      mkdir -p $out/bin
+      cd $src
+      zip -r $out/cambridge.love libs load res scene tetris conf.lua main.lua scene.lua funcs.lua
+      mkdir -p $out/libs
+      cp -r $src/libs/discord-rpc.* $out/libs
+      echo -n "${runScript}" > $out/bin/cambridge
+      chmod +x $out/bin/cambridge
 
-    export ICON_DIR=$out/share/icons/hicolor/48x48/apps
-    mkdir -p $ICON_DIR
-    cp $src/res/img/cambridge_transparent.png $ICON_DIR/cambridge.png
-    cp -r ${desktopItem}/share $out
-  '';
+      export ICON_DIR=$out/share/icons/hicolor/48x48/apps
+      mkdir -p $ICON_DIR
+      cp $src/res/img/cambridge_transparent.png $ICON_DIR/cambridge.png
+      cp -r ${desktopItem}/share $out
+    '';
 
   meta = {
     description = "The next open source block stacking game";
