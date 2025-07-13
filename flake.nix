@@ -8,20 +8,29 @@
     flake-compat.flake = false;
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-compat,
-  }: {
-    overlays.default = (final: prev: {
-      baz9k = {
-        magicseteditor = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = false;}
-        // { all = prev.callPackage ./magic-set-editor2/package.nix {includeNonMagicTemplates = true;}; };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-compat,
+    }:
+    {
+      overlays.default = (
+        final: prev: {
+          baz9k = {
+            magicseteditor =
+              prev.callPackage ./magic-set-editor2/package.nix { includeNonMagicTemplates = false; }
+              // {
+                all = prev.callPackage ./magic-set-editor2/package.nix { includeNonMagicTemplates = true; };
+              };
 
-        kreative-kore-fonts = prev.callPackage ./kreative-fonts/package.nix {};
+            kreative-kore-fonts = prev.callPackage ./kreative-fonts/package.nix { };
 
-        cambridge = prev.callPackage ./cambridge/package.nix {};
-      };
-    });
-  };
+            cambridge = prev.callPackage ./cambridge/package.nix { };
+
+            a-solitaire-mystery = prev.callPackage ./a-solitaire-mystery/package.nix { };
+          };
+        }
+      );
+    };
 }
