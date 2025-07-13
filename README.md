@@ -25,3 +25,9 @@ These fonts are:
 The block stacking game [Cambridge](https://github.com/cambridge-stacker/cambridge).
 
 Modpacks can be installed into `~/.local/share/love/cambridge/` as usual.
+
+### `a-solitaire-mystery`
+
+The itch.io version of Hempuli's [A Solitaire Mystery](https://hempuli.itch.io/a-solitaire-mystery).
+
+Requires `ASM_linux.tar.gz` in your nix-store. Download it from itch.io and run `nix-store --add-fixed sha256 ./ASM_linux.tar.gz` to add it to the nix store.
