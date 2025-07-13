@@ -59,7 +59,7 @@ stdenv.mkDerivation rec {
 
   fixupPhase = ''
     autoPatchelf $out/bin/ASM
-    wrapProgram $out/bin/ASM --append-flag "$out/ASM.love" --set "LUA_CPATH" "result/lib/lua/5.1/?.so" --prefix LD_LIBRARY_PATH : $out/lib
+    wrapProgram $out/bin/ASM --append-flag "$out/ASM.love" --set "LUA_CPATH" "$out/lib/lua/5.1/?.so" --prefix LD_LIBRARY_PATH : $out/lib
   '';
 
   meta = {
