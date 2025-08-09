@@ -31,3 +31,7 @@ Modpacks can be installed into `~/.local/share/love/cambridge/` as usual.
 The itch.io version of Hempuli's [A Solitaire Mystery](https://hempuli.itch.io/a-solitaire-mystery).
 
 Requires `ASM_linux.tar.gz` in your nix-store. Download it from itch.io and run `nix-store --add-fixed sha256 ./ASM_linux.tar.gz` to add it to the nix store.
+
+### `microwave`
+
+A microtonal synthesizer program written in Rust. Learn more [here](https://github.com/Woyten/tune).

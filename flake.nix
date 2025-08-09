@@ -29,6 +29,8 @@
             cambridge = prev.callPackage ./cambridge/package.nix { };
 
             a-solitaire-mystery = prev.callPackage ./a-solitaire-mystery/package.nix { };
+
+            microwave = prev.callPackage ./microwave/package.nix { };
           };
         }
       );
