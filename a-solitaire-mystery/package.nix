@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation rec {
   pname = "a-solitaire-mystery";
-  version = "1.5.2";
+  version = "1.5.10";
 
   src = requireFile {
     name = "ASM_linux.tar.gz";
     url = "https://hempuli.itch.io/a-solitaire-mystery";
     # Use `nix hash file --sri --type sha256` to get the correct hash
-    hash = "sha256-FpHOMA/WzwoQZD2XrFfMK4oO0EdbWY1SV2DNbnkkpVo=";
+    hash = "sha256-JovIuVKtVy4kQ8BRgb2YP+r64GpCeexZ4lDkDJ8Riho=";
   };
 
   nativeBuildInputs = [
