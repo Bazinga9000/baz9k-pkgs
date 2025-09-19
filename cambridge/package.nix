@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "cambridge";
-  version = "0.4.4.1";
+  version = "0.4.4.2";
 
   src = fetchFromGitHub {
     owner = "cambridge-stacker";
     repo = "cambridge";
     rev = "v${version}";
-    hash = "sha256-A29LdsNbtpEZepzVC7Ex+kw3b9w/Ksx4IfyyWlehRec=";
+    hash = "sha256-G66dWtAfYubQIGKWhj46ACjkYaVPZ2pjUq879QRRa0o=";
   };
 
   buildInputs = [
