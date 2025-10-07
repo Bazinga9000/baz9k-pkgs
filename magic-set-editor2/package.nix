@@ -56,6 +56,11 @@ stdenv.mkDerivation rec {
       --replace-fail "fontsDirectoryPath = appPath + pathSeparator + fontsDirectoryPath + (fontsDirectoryPath.EndsWith(pathSeparator) ? wxString() : pathSeparator);" "fontsDirectoryPath = \"$out/mse-fonts/\";"
   '';
 
+  cmakeFlags = [
+    # fix compatibility with CMake (https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html)
+    (lib.cmakeFeature "CMAKE_POLICY_VERSION_MINIMUM" "4.0")
+  ];
+
   installPhase = ''
     mkdir -p $out/bin/
     mkdir -p $TMPDIR/data
