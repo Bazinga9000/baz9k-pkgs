@@ -6,30 +6,53 @@
   pkg-config,
   boost,
   hunspell,
-  wxGTK32,
+  wxwidgets_3_3,
   makeBinaryWrapper,
   gtk3,
   makeDesktopItem,
+  applyPatches,
+  fetchpatch,
 
   includeNonMagicTemplates ? false
 }:
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.8";
+  version = "2.5.8.78b93e5";
 
-  src = fetchFromGitHub {
-    owner = "G-e-n-e-v-e-n-s-i-S";
-    repo = "MagicSetEditor2";
-    rev = "026400a1e092eca2b98360398fa78a22f532b780";
-    hash = "sha256-JCX+2yEfut7zEgcr7ugfoal8vP3MeLiuxHhJ0Ihy9KU=";
+  src = applyPatches {
+    src = fetchFromGitHub {
+        owner = "G-e-n-e-v-e-n-s-i-S";
+        repo = "MagicSetEditor2";
+        rev = "78b93e5701d10c17448b15eb547c9752f2635322";
+        hash = "sha256-HN4im29LFPAMpRPtw2l9n+2yQG+2+/CL5gQ8oFHN3Qs=";
+    };
+
+    patches = [
+      (fetchpatch {
+        url = "https://patch-diff.githubusercontent.com/raw/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2/pull/58.patch";
+        hash = "sha256-u0u/aRFY9G/HGopBwa/CLYdm/R/luBX8wpdp5COgXzE=";
+      })
+    ];
+
+    postPatch =  ''
+      substituteInPlace CMakeLists.txt \
+        --replace-fail "find_package(wxWidgets 3.3.1 CONFIG REQUIRED)" "find_package(wxWidgets 3.3.1 REQUIRED)" \
+        --replace-fail "cmake_minimum_required(VERSION 3.13)" "cmake_minimum_required(VERSION 3.5)"
+    '';
   };
+
+  # This has to be outside of applyPatches so we get set to the output's /share, not the source's
+  patchPhase = ''
+    substituteInPlace src/data/font.cpp \
+      --replace-fail "String appPath(wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath());" "String appPath = \"$out/share\";"
+  '';
 
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "add2e3b9796547c4cbe80e93965679cc484a7489";
-    hash = "sha256-Kh03WWNYJVBaByDarFmRqSyg0z1I3/d5Svwh9LLwuZE=";
+    rev = "193904386b311262422359d39e1ad64f533c4494";
+    hash = "sha256-PRw66ACBEgeuTFO8evebC3q3sSpPsA0HdsY2Bsfut/E=";
   };
 
   non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
@@ -48,17 +71,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     boost
     hunspell
-    wxGTK32
-  ];
-
-  patchPhase = ''
-    substituteInPlace src/data/font.cpp \
-      --replace-fail "fontsDirectoryPath = appPath + pathSeparator + fontsDirectoryPath + (fontsDirectoryPath.EndsWith(pathSeparator) ? wxString() : pathSeparator);" "fontsDirectoryPath = \"$out/mse-fonts/\";"
-  '';
-
-  cmakeFlags = [
-    # fix compatibility with CMake (https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html)
-    (lib.cmakeFeature "CMAKE_POLICY_VERSION_MINIMUM" "4.0")
+    wxwidgets_3_3
   ];
 
   installPhase = ''
@@ -81,7 +94,7 @@ stdenv.mkDerivation rec {
     cp ${./icon.png} $ICON_DIR/magicseteditor.png
     cp -r ${desktopItem}/share $out
 
-    export FONT_DIR=$out/mse-fonts
+    export FONT_DIR=$out/share/fonts
     mkdir -p $FONT_DIR
     mkdir -p $TMPDIR/fonts
     find $magic_pack/Magic\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
