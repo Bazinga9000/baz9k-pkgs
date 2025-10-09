@@ -37,8 +37,7 @@ stdenv.mkDerivation rec {
 
     postPatch =  ''
       substituteInPlace CMakeLists.txt \
-        --replace-fail "find_package(wxWidgets 3.3.1 CONFIG REQUIRED)" "find_package(wxWidgets 3.3.1 REQUIRED)" \
-        --replace-fail "cmake_minimum_required(VERSION 3.13)" "cmake_minimum_required(VERSION 3.5)"
+        --replace-fail "find_package(wxWidgets 3.3.1 CONFIG REQUIRED)" "find_package(wxWidgets 3.3.1 REQUIRED)"
     '';
   };
 
