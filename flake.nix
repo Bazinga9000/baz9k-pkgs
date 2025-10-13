@@ -31,6 +31,8 @@
             a-solitaire-mystery = prev.callPackage ./a-solitaire-mystery/package.nix { };
 
             microwave = prev.callPackage ./microwave/package.nix { };
+
+            nsmb-mariovsluigi = prev.callPackage ./nsmb-mariovsluigi/package.nix { };
           };
         }
       );
