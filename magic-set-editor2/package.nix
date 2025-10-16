@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
     patches = [
       (fetchpatch {
         url = "https://patch-diff.githubusercontent.com/raw/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2/pull/58.patch";
-        hash = "sha256-u0u/aRFY9G/HGopBwa/CLYdm/R/luBX8wpdp5COgXzE=";
+        hash = "sha256-6+U+gb9XQrixQHUwIk8Wc2vD0RmkMyJ+Y7+jOZIa484=";
       })
     ];
 
@@ -50,8 +50,8 @@ stdenv.mkDerivation rec {
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "193904386b311262422359d39e1ad64f533c4494";
-    hash = "sha256-PRw66ACBEgeuTFO8evebC3q3sSpPsA0HdsY2Bsfut/E=";
+    rev = "d2f99c2f43cbd139bd62a5c9ea429c9b641819c0";
+    hash = "sha256-6h5ugg+0wypxpxD27fLFdSMKMDg987VOrHNAC2CyJ74=";
   };
 
   non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
