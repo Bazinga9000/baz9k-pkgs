@@ -18,20 +18,20 @@
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.8.78b93e5";
+  version = "2.5.8-unstable-2025-10-23";
 
   src = applyPatches {
     src = fetchFromGitHub {
         owner = "G-e-n-e-v-e-n-s-i-S";
         repo = "MagicSetEditor2";
-        rev = "78b93e5701d10c17448b15eb547c9752f2635322";
-        hash = "sha256-HN4im29LFPAMpRPtw2l9n+2yQG+2+/CL5gQ8oFHN3Qs=";
+        rev = "bf7a9c2f14cd159961062e79fd922f12c2715e82";
+        hash = "sha256-UaHFdEpGo+ykkkGQyFZqwA2nm19MhEYU3fHLgV5dPH0=";
     };
 
     patches = [
       (fetchpatch {
         url = "https://patch-diff.githubusercontent.com/raw/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2/pull/58.patch";
-        hash = "sha256-6+U+gb9XQrixQHUwIk8Wc2vD0RmkMyJ+Y7+jOZIa484=";
+        hash = "sha256-4IXzmVO1BH/9pqzYdfTinotzhwCLfjRGtAD22Ku2dak=";
       })
     ];
 
@@ -50,8 +50,8 @@ stdenv.mkDerivation rec {
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "d2f99c2f43cbd139bd62a5c9ea429c9b641819c0";
-    hash = "sha256-6h5ugg+0wypxpxD27fLFdSMKMDg987VOrHNAC2CyJ74=";
+    rev = "8cd7d348f035f6ef9e04947c91cd57f8311a726d";
+    hash = "sha256-HmMEKGJwEdo9qXKtHwxi8QkMQY6iYzCT8E9ZPNh+irY=";
   };
 
   non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
