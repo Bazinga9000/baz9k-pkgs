@@ -14,16 +14,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "microwave";
-  version = "0.35.0";
+  version = "0.38.0";
 
   src = fetchFromGitHub {
     owner = "Woyten";
     repo = "tune";
-    rev = version;
-    hash = "sha256-iVIncHhmSQ+Gcz8Mt4Cx+Q7sbDl4tZ+ynOIxlnsfPdE=";
+    rev = "microwave-${version}";
+    hash = "sha256-9o9R1spXHWHSJfbBvvRXGhZeePwOqrsXuHczHkfD1yA=";
   };
 
-  cargoHash = "sha256-JXMeAOd2bKUtF9Kut8aS2xpooR1CVxbBxPzk62nJCr0=";
+  cargoHash = "sha256-fow6wkA0jViOWqPK1MNzOVOAdXmpdOJdlAf4g+ZnT5o=";
 
   nativeBuildInputs = [
     pkg-config
@@ -35,13 +35,15 @@ rustPlatform.buildRustPackage rec {
   buildInputs = [
     udev
     vulkan-loader
-  ] ++ lib.optionals stdenv.isDarwin [
+  ]
+  ++ lib.optionals stdenv.isDarwin [
     darwin.apple_sdk.frameworks.CoreAudio
     darwin.apple_sdk.frameworks.CoreGraphics
     darwin.apple_sdk.frameworks.IOKit
     darwin.apple_sdk.frameworks.Metal
     darwin.apple_sdk.frameworks.QuartzCore
-  ] ++ lib.optionals stdenv.isLinux [
+  ]
+  ++ lib.optionals stdenv.isLinux [
     alsa-lib
     xorg.libX11
     xorg.libXcursor
@@ -56,7 +58,13 @@ rustPlatform.buildRustPackage rec {
     cp ${./FiraSans-Regular.ttf} $out/bin/assets/FiraSans-Regular.ttf
 
     patchelf $out/bin/microwave \
-      --add-rpath ${lib.makeLibraryPath [ vulkan-loader xorg.libX11 libxkbcommon ]}
+      --add-rpath ${
+        lib.makeLibraryPath [
+          vulkan-loader
+          xorg.libX11
+          libxkbcommon
+        ]
+      }
   '';
 
   meta = {
