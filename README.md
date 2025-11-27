@@ -2,13 +2,47 @@
 
 This repository contains a handful of NixOS packages packaged by me. You're free to use these as the basis for any inclusions in nixpkgs, just let me know if you do.
 
-When using the overlay, all packages are prefixed with `baz9k`.
+This flake is intended for use on `nixos-unstable`.
+
+## Usage
+You can try out these packages without installing them with the following command:
+```
+nix run github:Bazinga9000/baz9k-pkgs#PACKAGE_NAME
+```
+
+Alternatively, to use these packages in an NixOS configuration, add this flake to your inputs:
+```nix
+inputs.baz9k-pkgs = {
+    url = "github:Bazinga9000/baz9k-pkgs";
+    inputs.nixpkgs.follows = "nixpkgs";
+}; 
+```
+And either add the desired packages from inputs:
+```nix
+environment.systemPackages = [
+    inputs.baz9k-pkgs.packages.${pkgs.stdenv.hostPlatform.system}.PACKAGE_NAME
+]
+```
+Or enable the provided overlay:
+```nix
+nixpkgs.overlays = [ inputs.baz9k-pkgs.overlays.default ];
+environment.systemPackages = [
+    PACKAGE_NAME
+];
+```
 
 ## List of packages
-### `magicseteditor` and `magicseteditor.all`
-A package of [this fork](https://github.com/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2) of Magic Set Editor 2, for creating and editing custom Magic: The Gathering cards. `magicseteditor` ships with the MSE community's [Full Template Pack](https://github.com/MagicSetEditorPacks/Full-Magic-Pack) for Magic cards.
+### `a-solitaire-mystery`
 
-If you want to also include the similar pack for [non-Magic games](https://github.com/MagicSetEditorPacks/Full-Non-Magic-Pack), use `magicseteditor.all`. This is large, and the games inside work to varying levels. Since I primarily use this for Magic only, I only provide support/fixes for MSE failing to open at all due to *extremely* broken templates if you use this option. Problems with individual templates should otherwise be reported upstream.
+The itch.io version of Hempuli's [A Solitaire Mystery](https://hempuli.itch.io/a-solitaire-mystery).
+
+Requires `ASM_linux.tar.gz` in your nix-store. Download it from itch.io and run `nix-store --add-fixed sha256 ./ASM_linux.tar.gz` to add it to the nix store.
+
+### `cambridge`
+
+The block stacking game [Cambridge](https://github.com/cambridge-stacker/cambridge).
+
+Modpacks can be installed into `~/.local/share/love/cambridge/` as usual.
 
 ### `kreative-core-fonts`
 
@@ -20,17 +54,10 @@ These fonts are:
 - Fairfax HD
 - Kreative Square
 
-### `cambridge`
+### `magicseteditor` and `magicseteditor-all`
+A package of [this fork](https://github.com/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2) of Magic Set Editor 2, for creating and editing custom Magic: The Gathering cards. `magicseteditor` ships with the MSE community's [Full Template Pack](https://github.com/MagicSetEditorPacks/Full-Magic-Pack) for Magic cards.
 
-The block stacking game [Cambridge](https://github.com/cambridge-stacker/cambridge).
-
-Modpacks can be installed into `~/.local/share/love/cambridge/` as usual.
-
-### `a-solitaire-mystery`
-
-The itch.io version of Hempuli's [A Solitaire Mystery](https://hempuli.itch.io/a-solitaire-mystery).
-
-Requires `ASM_linux.tar.gz` in your nix-store. Download it from itch.io and run `nix-store --add-fixed sha256 ./ASM_linux.tar.gz` to add it to the nix store.
+If you want to also include the similar pack for [non-Magic games](https://github.com/MagicSetEditorPacks/Full-Non-Magic-Pack), use `magicseteditor.all`. This is large, and the games inside work to varying levels. Since I primarily use this for Magic only, I only provide support/fixes for MSE failing to open at all due to *extremely* broken templates if you use this option. Problems with individual templates should otherwise be reported upstream.
 
 ### `microwave`
 

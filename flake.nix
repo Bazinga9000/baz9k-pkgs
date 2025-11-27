@@ -4,37 +4,50 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      flake-compat,
-    }:
-    {
-      overlays.default = (
-        final: prev: {
-          baz9k = {
-            magicseteditor =
-              prev.callPackage ./magic-set-editor2/package.nix { includeNonMagicTemplates = false; }
-              // {
-                all = prev.callPackage ./magic-set-editor2/package.nix { includeNonMagicTemplates = true; };
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
+      {
+
+        systems = [
+          "x86_64-linux"
+          # If anyone's out there using this flake on any other system type, feel free to PR in other systems you might need.
+          # I can't verify that these builds work on such systems, which is why they aren't already here.
+        ];
+
+        imports = [
+          inputs.flake-parts.flakeModules.easyOverlay
+        ];
+
+        perSystem =
+          { config, pkgs, ... }:
+          {
+            packages = rec {
+              magicseteditor = pkgs.callPackage ./magic-set-editor2/package.nix {
+                includeNonMagicTemplates = false;
               };
-
-            kreative-kore-fonts = prev.callPackage ./kreative-fonts/package.nix { };
-
-            cambridge = prev.callPackage ./cambridge/package.nix { };
-
-            a-solitaire-mystery = prev.callPackage ./a-solitaire-mystery/package.nix { };
-
-            microwave = prev.callPackage ./microwave/package.nix { };
-
-            nsmb-mariovsluigi = prev.callPackage ./nsmb-mariovsluigi/package.nix { };
+              magicseteditor-all = pkgs.callPackage ./magic-set-editor2/package.nix {
+                includeNonMagicTemplates = true;
+              };
+              kreative-kore-fonts = pkgs.callPackage ./kreative-fonts/package.nix { };
+              cambridge = pkgs.callPackage ./cambridge/package.nix { };
+              a-solitaire-mystery = pkgs.callPackage ./a-solitaire-mystery/package.nix { };
+              microwave = pkgs.callPackage ./microwave/package.nix { };
+              nsmb-mariovsluigi = pkgs.callPackage ./nsmb-mariovsluigi/package.nix { };
+            };
           };
-        }
-      );
-    };
+      }
+    );
 }
