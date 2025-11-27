@@ -34,7 +34,9 @@
         perSystem =
           { config, pkgs, ... }:
           {
-            packages = rec {
+            overlayAttrs = config.packages;
+
+            packages = {
               magicseteditor = pkgs.callPackage ./magic-set-editor2/package.nix {
                 includeNonMagicTemplates = false;
               };
