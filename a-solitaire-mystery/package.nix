@@ -31,6 +31,10 @@ stdenv.mkDerivation rec {
     rm lib/*so*
     mv libsteam_api.so lib
 
+    # For some reason, upstream love exports its library as libliblove.so for the time being, manually introduce the right name
+    # see discussion on https://github.com/NixOS/nixpkgs/pull/473153
+    cp ${love}/lib/libliblove.so lib/liblove-11.5.so
+
     # clean up some unnecessary files
     rm ASM
     rm ASM.desktop
@@ -58,7 +62,8 @@ stdenv.mkDerivation rec {
   dontAutoPatchElf = true;
 
   fixupPhase = ''
-    autoPatchelf $out/bin/ASM
+    # ignore-missing is set so that liblove can get picked up dynamically from $out/lib
+    autoPatchelf $out/bin/ASM --ignore-missing="liblove-11.5.so"
     wrapProgram $out/bin/ASM --append-flag "$out/ASM.love" --set "LUA_CPATH" "$out/lib/lua/5.1/?.so" --prefix LD_LIBRARY_PATH : $out/lib
   '';
 
