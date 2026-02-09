@@ -13,36 +13,25 @@
   applyPatches,
   fetchpatch,
 
-  includeNonMagicTemplates ? false
+  includeNonMagicTemplates ? false,
 }:
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.8-unstable-2025-10-23";
+  version = "2.5.8-unstable-2026-01-25";
 
-  src = applyPatches {
-    src = fetchFromGitHub {
-        owner = "G-e-n-e-v-e-n-s-i-S";
-        repo = "MagicSetEditor2";
-        rev = "bf7a9c2f14cd159961062e79fd922f12c2715e82";
-        hash = "sha256-UaHFdEpGo+ykkkGQyFZqwA2nm19MhEYU3fHLgV5dPH0=";
-    };
-
-    patches = [
-      (fetchpatch {
-        url = "https://patch-diff.githubusercontent.com/raw/G-e-n-e-v-e-n-s-i-S/MagicSetEditor2/pull/58.patch";
-        hash = "sha256-4IXzmVO1BH/9pqzYdfTinotzhwCLfjRGtAD22Ku2dak=";
-      })
-    ];
-
-    postPatch =  ''
-      substituteInPlace CMakeLists.txt \
-        --replace-fail "find_package(wxWidgets 3.3.1 CONFIG REQUIRED)" "find_package(wxWidgets 3.3.1 REQUIRED)"
-    '';
+  src = fetchFromGitHub {
+    owner = "G-e-n-e-v-e-n-s-i-S";
+    repo = "MagicSetEditor2";
+    rev = "7fde6b26052133d0e6b90a0a4584d99a53808f91";
+    hash = "sha256-5Au7NBfPl39asPqHIDZ06dVy5RdEVO7GomWfYkSYBZE=";
   };
 
   # This has to be outside of applyPatches so we get set to the output's /share, not the source's
   patchPhase = ''
+    substituteInPlace CMakeLists.txt \
+      --replace-fail "find_package(wxWidgets 3.3.1 CONFIG REQUIRED)" "find_package(wxWidgets 3.3.1 REQUIRED)"
+
     substituteInPlace src/data/font.cpp \
       --replace-fail "String appPath(wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath());" "String appPath = \"$out/share\";"
   '';
@@ -50,16 +39,20 @@ stdenv.mkDerivation rec {
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "8cd7d348f035f6ef9e04947c91cd57f8311a726d";
-    hash = "sha256-HmMEKGJwEdo9qXKtHwxi8QkMQY6iYzCT8E9ZPNh+irY=";
+    rev = "4359ec3fae3839b8e5874d45246a42920fed3795";
+    hash = "sha256-PrBCJ8kcGxrBd3YOhsYnOmra0HVuqXbOtw1+J6bRFus=";
   };
 
-  non_magic_pack = if includeNonMagicTemplates then fetchFromGitHub {
-    owner = "MagicSetEditorPacks";
-    repo = "Full-Non-Magic-Pack";
-    rev = "e9dfb6280967230c66d2eb6a027708d99bb66df2";
-    hash = "sha256-RJyP3yO99FjC4ZN8j5TloZhBiTmIu+ZhgbYz/pXkld8=";
-  } else null;
+  non_magic_pack =
+    if includeNonMagicTemplates then
+      fetchFromGitHub {
+        owner = "MagicSetEditorPacks";
+        repo = "Full-Non-Magic-Pack";
+        rev = "2eb696a454c374d7d33cea1af57430e5b04be37b";
+        hash = "sha256-PS3Xz0P6cT6z0uhKf6vmBwkwbNT2+Qi1rtXYJ5l7sIM=";
+      }
+    else
+      null;
 
   nativeBuildInputs = [
     cmake
@@ -77,12 +70,17 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin/
     mkdir -p $TMPDIR/data
     cp -r $magic_pack/data/* $TMPDIR/data
-    ${if includeNonMagicTemplates then ''
-      chmod -R +w $TMPDIR/data
-      cp -rn $non_magic_pack/data/* $TMPDIR/data
-      chmod +w $TMPDIR/data/PACG.mse-game/game
-      cp ${./PACG_fixed} $TMPDIR/data/PACG.mse-game/game
-    '' else ""}
+    ${
+      if includeNonMagicTemplates then
+        ''
+          chmod -R +w $TMPDIR/data
+          cp -rn $non_magic_pack/data/* $TMPDIR/data
+          chmod +w $TMPDIR/data/PACG.mse-game/game
+          cp ${./PACG_fixed} $TMPDIR/data/PACG.mse-game/game
+        ''
+      else
+        ""
+    }
     cp -r $TMPDIR/data $out/data
     cp -r $src/resource $out
     cp magicseteditor $out/bin/magicseteditor
@@ -97,9 +95,14 @@ stdenv.mkDerivation rec {
     mkdir -p $FONT_DIR
     mkdir -p $TMPDIR/fonts
     find $magic_pack/Magic\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
-    ${if includeNonMagicTemplates then ''
-      find $non_magic_pack/Other\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
-    '' else ""}
+    ${
+      if includeNonMagicTemplates then
+        ''
+          find $non_magic_pack/Other\ -\ Fonts -iname '*.ttf' -exec cp -n \{\} $TMPDIR/fonts \;
+        ''
+      else
+        ""
+    }
     cp $TMPDIR/fonts/* $FONT_DIR
   '';
 
