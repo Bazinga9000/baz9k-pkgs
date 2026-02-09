@@ -5,7 +5,10 @@
   pkg-config,
   udev,
   vulkan-loader,
-  xorg,
+  libX11,
+  libXcursor,
+  libxcb,
+  libXi,
   libxkbcommon,
   stdenv,
   darwin,
@@ -45,10 +48,10 @@ rustPlatform.buildRustPackage rec {
   ]
   ++ lib.optionals stdenv.isLinux [
     alsa-lib
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libxcb
-    xorg.libXi
+    libX11
+    libXcursor
+    libxcb
+    libXi
     libxkbcommon
   ];
 
@@ -61,7 +64,7 @@ rustPlatform.buildRustPackage rec {
       --add-rpath ${
         lib.makeLibraryPath [
           vulkan-loader
-          xorg.libX11
+          libX11
           libxkbcommon
         ]
       }
