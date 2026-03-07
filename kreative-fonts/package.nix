@@ -1,46 +1,46 @@
 {
   lib,
   stdenv,
-  fetchzip
+  fetchzip,
 }:
 
 stdenv.mkDerivation rec {
   pname = "kreative-kore-fonts";
-  version = "2025-09-01";
+  version = "2026-02-08";
 
   dontUnpack = true;
 
   constructium = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Constructium.zip";
-    hash = "sha256-Fti/i01fjRJOLBkDwxvX0/ndoJmmqHS/vl+KMGeEYFE=";
+    hash = "sha256-d8PDrGrAf2gYFeZyu1xToHmS6ndF2QDYSFpokAx9E1w=";
     stripRoot = false;
   };
 
   fairfax = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Fairfax.zip";
-    hash = "sha256-T31Tvp1LpTH3me9v+MoV9pC+p3bbBCLvLR83UBBv8Ck=";
+    hash = "sha256-oZPHY5P+wNdcxzPKp68KO4A0au7awvpEmPK3ivdeBPY=";
     stripRoot = false;
   };
 
   fairfaxHD = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/FairfaxHD.zip";
-    hash = "sha256-8ms8qnsXKcZr7uAZD3ZgU4ou63QXAW+jkFiOah6n04Y=";
+    hash = "sha256-ZRGHPMOOLjAWaO+a06QSzWYqzMEfWYS6QjaQAJzij/E=";
     stripRoot = false;
   };
 
   kreativeSquare = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/KreativeSquare.zip";
-    hash = "sha256-QFWHF8dUUS+TAIHFDmtbdM/GqFJLjTfGJvRiUcVjpW0=";
+    hash = "sha256-t6GbOLU4iicavxR2ZWdI9gbLSOVWbwDEFTf3gJHLy5k=";
     stripRoot = false;
   };
 
   installPhase = ''
-      export FONT_DIR=$out/share/fonts
-      mkdir -p $out/share/fonts
-      cp $constructium/*.ttf $FONT_DIR
-      cp $fairfax/*.ttf $FONT_DIR
-      cp $fairfaxHD/*.ttf $FONT_DIR
-      cp $kreativeSquare/*.ttf $FONT_DIR
+    export FONT_DIR=$out/share/fonts
+    mkdir -p $out/share/fonts
+    cp $constructium/*.ttf $FONT_DIR
+    cp $fairfax/*.ttf $FONT_DIR
+    cp $fairfaxHD/*.ttf $FONT_DIR
+    cp $kreativeSquare/*.ttf $FONT_DIR
   '';
 
   meta = {
