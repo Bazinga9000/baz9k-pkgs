@@ -1,0 +1,5 @@
+builds:
+  exclude:
+    - 'packages.*.a-solitaire-mystery'   # ASM skipped as it requires proprietary file
+  include:
+    - 'packages.*.*'    # Build all packages for x86_64-linux
