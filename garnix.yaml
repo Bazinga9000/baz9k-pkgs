@@ -1,5 +1,6 @@
 builds:
   exclude:
     - 'packages.*.a-solitaire-mystery'   # ASM skipped as it requires proprietary file
+    - 'packages.*.nsmb-mariovsluigi' # MvL skipped, no upstream license (assuming unfree)
   include:
     - 'packages.*.*'    # Build all packages for x86_64-linux
