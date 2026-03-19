@@ -31,6 +31,14 @@ environment.systemPackages = [
 ];
 ```
 
+Most of this repository's packages are automatically built and cached daily with [Garnix](https://garnix.io/). To avoid local builds, add the following to your nix configuration (or append to your existing `substituters` and `trusted-public-keys` if they already exist):
+```nix
+nix.settings = {
+  substituters = [ "https://cache.garnix.io" ];
+  trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+};
+```
+
 ## List of packages
 ### `a-solitaire-mystery`
 
