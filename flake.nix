@@ -8,6 +8,24 @@
 
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
+
+    # Input for uiua-git mirror
+    uiua = {
+      url = "github:uiua-lang/uiua";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Inputs for noctalia-git-calendar mirror
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -32,7 +50,12 @@
         ];
 
         perSystem =
-          { config, pkgs, ... }:
+          {
+            config,
+            pkgs,
+            system,
+            ...
+          }:
           {
             overlayAttrs = config.packages;
 
@@ -48,6 +71,14 @@
               a-solitaire-mystery = pkgs.callPackage ./a-solitaire-mystery/package.nix { };
               microwave = pkgs.callPackage ./microwave/package.nix { };
               nsmb-mariovsluigi = pkgs.callPackage ./nsmb-mariovsluigi/package.nix { };
+
+              # Mirrors
+              uiua-git = inputs.uiua.packages.${system}.default;
+              noctalia-git-calendar =
+                inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override
+                  {
+                    calendarSupport = true;
+                  };
             };
           };
       }

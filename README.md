@@ -74,3 +74,13 @@ A microtonal synthesizer program written in Rust. Learn more [here](https://gith
 ### `nsmb-mariovsluigi`
 
 A standalone 2-10 player remake of the Mario vs Luigi gamemode from New Super Mario Bros DS. Play in the browser [here](https://ipodtouch0218.itch.io/nsmb-mariovsluigi).
+
+
+### Package Mirrors
+
+This flake also contains mirrors of some packages with their own flakes to allow them to be cached into Garnix, updated daily directly from the most recent commit. These packages are:
+
+- `uiua-git`: The [Uiua](https://www.uiua.org/) programming language, with all features enabled.
+- `noctalia-git-calendar`: The [Noctalia shell](https://noctalia.dev/), with calendar support enabled.
+
+Do not report issues with these packages upstream unless you have already verified that the problem is not exclusive to this mirror.
