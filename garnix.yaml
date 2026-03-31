@@ -2,5 +2,6 @@ builds:
   exclude:
     - 'packages.*.a-solitaire-mystery'   # ASM skipped as it requires proprietary file
     - 'packages.*.nsmb-mariovsluigi' # MvL skipped, no upstream license (assuming unfree)
+    - 'packages.*.times-new-argam'       # TimesNewArgam is licensed under CC NC-BY 4.0, which isn't buildable by CI.
   include:
     - 'packages.*.*'    # Build all packages for x86_64-linux

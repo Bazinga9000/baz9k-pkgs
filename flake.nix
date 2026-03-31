@@ -71,6 +71,7 @@
               a-solitaire-mystery = pkgs.callPackage ./a-solitaire-mystery/package.nix { };
               microwave = pkgs.callPackage ./microwave/package.nix { };
               nsmb-mariovsluigi = pkgs.callPackage ./nsmb-mariovsluigi/package.nix { };
+              times-new-argam = pkgs.callPackage ./times-new-argam/package.nix { };
 
               # Mirrors
               uiua-git = inputs.uiua.packages.${system}.default.override { doCheck = false; }; # Disable check phase until tests stop failing

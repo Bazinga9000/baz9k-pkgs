@@ -75,6 +75,11 @@ A microtonal synthesizer program written in Rust. Learn more [here](https://gith
 
 A standalone 2-10 player remake of the Mario vs Luigi gamemode from New Super Mario Bros DS. Play in the browser [here](https://ipodtouch0218.itch.io/nsmb-mariovsluigi).
 
+### `times-new-argam`
+
+A font for displaying the [Argam](https://www.vincico.com/arqam/digits/argam-kinoctove.html) numeral set.
+> Argam orignally created by Michael Thomas De Vlieger. Times New Argam font created by Shannon Lovelace.
+
 
 ### Package Mirrors
 
