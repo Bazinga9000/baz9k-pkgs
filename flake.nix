@@ -74,7 +74,7 @@
               times-new-argam = pkgs.callPackage ./times-new-argam/package.nix { };
 
               # Mirrors
-              uiua-git = inputs.uiua.packages.${system}.default.override { doCheck = false; }; # Disable check phase until tests stop failing
+              uiua-git = inputs.uiua.packages.${system}.default;
               noctalia-git-calendar =
                 inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override
                   {
