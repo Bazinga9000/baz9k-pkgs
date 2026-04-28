@@ -6,31 +6,31 @@
 
 stdenv.mkDerivation rec {
   pname = "kreative-kore-fonts";
-  version = "2026-02-08";
+  version = "2026-04-12";
 
   dontUnpack = true;
 
   constructium = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Constructium.zip";
-    hash = "sha256-d8PDrGrAf2gYFeZyu1xToHmS6ndF2QDYSFpokAx9E1w=";
+    hash = "sha256-G1Bu9feDFosum44r3QgNqIkClf5QkSBBnIY9gXbHHWU=";
     stripRoot = false;
   };
 
   fairfax = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Fairfax.zip";
-    hash = "sha256-oZPHY5P+wNdcxzPKp68KO4A0au7awvpEmPK3ivdeBPY=";
+    hash = "sha256-LMe7txsuxm0HVP7Mds5Pndp604svhc+FHaJODT479nk=";
     stripRoot = false;
   };
 
   fairfaxHD = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/FairfaxHD.zip";
-    hash = "sha256-ZRGHPMOOLjAWaO+a06QSzWYqzMEfWYS6QjaQAJzij/E=";
+    hash = "sha256-8DKQkUb2DwqF02uYLPOa4KwLpi6nuLSycnZ65wTfVO4=";
     stripRoot = false;
   };
 
   kreativeSquare = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/KreativeSquare.zip";
-    hash = "sha256-t6GbOLU4iicavxR2ZWdI9gbLSOVWbwDEFTf3gJHLy5k=";
+    hash = "sha256-4yfv0VAhhDHvpqMoFbjezhwPc+UGFvR1YQjAJiuWCH0=";
     stripRoot = false;
   };
 
