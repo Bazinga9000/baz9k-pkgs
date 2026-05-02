@@ -70,6 +70,7 @@
               cambridge = pkgs.callPackage ./cambridge/package.nix { };
               a-solitaire-mystery = pkgs.callPackage ./a-solitaire-mystery/package.nix { };
               microwave = pkgs.callPackage ./microwave/package.nix { };
+              nahuatl-one-font = pkgs.callPackage ./nahuatl-one-font/package.nix { };
               nsmb-mariovsluigi = pkgs.callPackage ./nsmb-mariovsluigi/package.nix { };
               times-new-argam = pkgs.callPackage ./times-new-argam/package.nix { };
 

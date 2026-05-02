@@ -71,6 +71,10 @@ If you want to also include the similar pack for [non-Magic games](https://githu
 
 A microtonal synthesizer program written in Rust. Learn more [here](https://github.com/Woyten/tune).
 
+### `nahuatl-one-font`
+
+A font for Edward Trager's Nahuatl abugida. Learn more [here](https://unifont.org/nahuatl/).
+
 ### `nsmb-mariovsluigi`
 
 A standalone 2-10 player remake of the Mario vs Luigi gamemode from New Super Mario Bros DS. Play in the browser [here](https://ipodtouch0218.itch.io/nsmb-mariovsluigi).
