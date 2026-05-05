@@ -36,11 +36,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1777678872,
-        "narHash": "sha256-EPIFsulyon7Z1vLQq5Fk64GR8L7cQsT+IPhcsukVbgk=",
+        "lastModified": 1777932387,
+        "narHash": "sha256-nUYVPiqrzr36ThiQOAr5MKeGHDBSDM3OFWkz0uDjOvc=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "5250617bffd85403b14dbf43c3870e7f255d2c16",
+        "rev": "71a3a77326609675e9f8b51084cf23d5d1945899",
         "type": "github"
       },
       "original": {
@@ -223,11 +223,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1777669658,
-        "narHash": "sha256-cqG5CEcYapG8HW3gM5ZkoKHV4bsoC8t+zEetmMbEmv4=",
+        "lastModified": 1777954518,
+        "narHash": "sha256-RD6RdQSMEmVVOt9YJT6PpZXzwUxs5NZ/+GDWrbPPmx0=",
         "owner": "uiua-lang",
         "repo": "uiua",
-        "rev": "0bda32d139365a8b19a21411d291e1f85ce5586f",
+        "rev": "974e016051fb25cd80deca28eacfff7306374eac",
         "type": "github"
       },
       "original": {
