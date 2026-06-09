@@ -14,18 +14,6 @@
       url = "github:uiua-lang/uiua";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Inputs for noctalia-git-calendar mirror
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.noctalia-qs.follows = "noctalia-qs";
-    };
-
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -76,11 +64,6 @@
 
               # Mirrors
               uiua-git = inputs.uiua.packages.${system}.default;
-              noctalia-git-calendar =
-                inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override
-                  {
-                    calendarSupport = true;
-                  };
             };
           };
       }
