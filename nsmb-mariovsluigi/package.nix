@@ -1,33 +1,34 @@
-{ lib
-, stdenv
-, fetchzip
-, autoPatchelfHook
-, gtk3
-, zlib
-, alsa-lib
-, dbus
-, libGL
-, libXcursor
-, libXext
-, libXi
-, libXinerama
-, libxkbcommon
-, libXrandr
-, libXScrnSaver
-, libXxf86vm
-, udev
-, vulkan-loader # (not used by default, enable in settings menu)
-, wayland # (not used by default, enable with SDL_VIDEODRIVER=wayland - doesn't support HiDPI)
-, makeDesktopItem
+{
+  lib,
+  stdenv,
+  fetchzip,
+  autoPatchelfHook,
+  gtk3,
+  zlib,
+  alsa-lib,
+  dbus,
+  libGL,
+  libXcursor,
+  libXext,
+  libXi,
+  libXinerama,
+  libxkbcommon,
+  libXrandr,
+  libXScrnSaver,
+  libXxf86vm,
+  udev,
+  vulkan-loader, # (not used by default, enable in settings menu)
+  wayland, # (not used by default, enable with SDL_VIDEODRIVER=wayland - doesn't support HiDPI)
+  makeDesktopItem,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "nsmb-mariovsluigi";
-  version = "2.0.4.1";
+  version = "2.1.1.0";
 
   src = fetchzip {
     url = "https://github.com/ipodtouch0218/NSMB-MarioVsLuigi/releases/download/v${finalAttrs.version}/MarioVsLuigi-Linux-v${finalAttrs.version}.zip";
-    hash = "sha256-KgJN7hJSbR/G6rGObbMzF1iTkiM3vAY3+TJNvLPMZYU=";
+    hash = "sha256-+bcE8L9anD15MI0jUWKcWt1mssn587+QQ3XU7T+F3Wo=";
   };
 
   nativeBuildInputs = [
@@ -114,7 +115,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Standalone Unity remake of New Super Mario Bros DS' multiplayer gamemode, \"Mario vs Luigi\"";
     homepage = "https://github.com/ipodtouch0218/NSMB-MarioVsLuigi";
     license = licenses.unfree;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
     platforms = [ "x86_64-linux" ];
   };
 })
