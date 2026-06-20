@@ -6,7 +6,7 @@
 
 stdenv.mkDerivation rec {
   pname = "kreative-kore-fonts";
-  version = "2026-04-12";
+  version = "2026-05-08";
 
   dontUnpack = true;
 
@@ -18,13 +18,13 @@ stdenv.mkDerivation rec {
 
   fairfax = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Fairfax.zip";
-    hash = "sha256-LMe7txsuxm0HVP7Mds5Pndp604svhc+FHaJODT479nk=";
+    hash = "sha256-6wwC12ATWapSCCcLMs5d478kFE6NAZRLwpzOw2G9OZo=";
     stripRoot = false;
   };
 
   fairfaxHD = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/FairfaxHD.zip";
-    hash = "sha256-8DKQkUb2DwqF02uYLPOa4KwLpi6nuLSycnZ65wTfVO4=";
+    hash = "sha256-9AMveEqFx9rdxYI5d4sbVZj7QJtH9ImelOfOqlDZ5UI=";
     stripRoot = false;
   };
 
