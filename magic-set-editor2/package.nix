@@ -10,21 +10,19 @@
   makeBinaryWrapper,
   gtk3,
   makeDesktopItem,
-  applyPatches,
-  fetchpatch,
 
   includeNonMagicTemplates ? false,
 }:
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.8-unstable-2026-01-25";
+  version = "2.5.8-unstable-2026-06-19";
 
   src = fetchFromGitHub {
     owner = "G-e-n-e-v-e-n-s-i-S";
     repo = "MagicSetEditor2";
-    rev = "7fde6b26052133d0e6b90a0a4584d99a53808f91";
-    hash = "sha256-5Au7NBfPl39asPqHIDZ06dVy5RdEVO7GomWfYkSYBZE=";
+    rev = "d9b58bb5eb666d53573e2c4eade5c485e7638179";
+    hash = "sha256-eL6+s0rItOy0ILISb8v5pdU3CFcr58+AriO6Q2fLArM=";
   };
 
   # This has to be outside of applyPatches so we get set to the output's /share, not the source's
@@ -39,8 +37,8 @@ stdenv.mkDerivation rec {
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "4359ec3fae3839b8e5874d45246a42920fed3795";
-    hash = "sha256-PrBCJ8kcGxrBd3YOhsYnOmra0HVuqXbOtw1+J6bRFus=";
+    rev = "d5a825b6c08d5a9b092b54595a33a84facf49ae1";
+    hash = "sha256-oayMOVa2ksMsHWTFPA4XcBhBOKlmTFgnK1SlvnM00Yc=";
   };
 
   non_magic_pack =
@@ -48,8 +46,8 @@ stdenv.mkDerivation rec {
       fetchFromGitHub {
         owner = "MagicSetEditorPacks";
         repo = "Full-Non-Magic-Pack";
-        rev = "2eb696a454c374d7d33cea1af57430e5b04be37b";
-        hash = "sha256-PS3Xz0P6cT6z0uhKf6vmBwkwbNT2+Qi1rtXYJ5l7sIM=";
+        rev = "84c6722f18e0838ff4a842ad13eefb71d9a39f24";
+        hash = "sha256-U8l7p/6AKzYumRGR7tYlZN9pJ90PwcOy+EB0N4lkF8I=";
       }
     else
       null;
@@ -75,8 +73,6 @@ stdenv.mkDerivation rec {
         ''
           chmod -R +w $TMPDIR/data
           cp -rn $non_magic_pack/data/* $TMPDIR/data
-          chmod +w $TMPDIR/data/PACG.mse-game/game
-          cp ${./PACG_fixed} $TMPDIR/data/PACG.mse-game/game
         ''
       else
         ""
