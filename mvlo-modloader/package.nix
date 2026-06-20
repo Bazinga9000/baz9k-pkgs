@@ -71,6 +71,10 @@ buildFHSEnv {
 
   extraInstallCommands = ''
     mkdir -p $out/share/applications
+
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+    cp ${./icon.png} $out/share/icons/hicolor/256x256/apps/mvlo-modloader.png
+
     cp ${
       makeDesktopItem {
         name = "MvLO-ModLoader";
@@ -78,6 +82,7 @@ buildFHSEnv {
         desktopName = "MvLO ModLoader";
         comment = "Mod Loader for Mario vs Luigi Online";
         categories = [ "Game" ];
+        icon = "mvlo-modloader";
       }
     }/share/applications/* $out/share/applications/
   '';
