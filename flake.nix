@@ -60,6 +60,7 @@
               microwave = pkgs.callPackage ./microwave/package.nix { };
               nahuatl-one-font = pkgs.callPackage ./nahuatl-one-font/package.nix { };
               nsmb-mariovsluigi = pkgs.callPackage ./nsmb-mariovsluigi/package.nix { };
+              mvlo-modloader = pkgs.callPackage ./mvlo-modloader/package.nix { };
               times-new-argam = pkgs.callPackage ./times-new-argam/package.nix { };
 
               # Mirrors

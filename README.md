@@ -75,9 +75,12 @@ A microtonal synthesizer program written in Rust. Learn more [here](https://gith
 
 A font for Edward Trager's Nahuatl abugida. Learn more [here](https://unifont.org/nahuatl/).
 
-### `nsmb-mariovsluigi`
+### `nsmb-mariovsluigi` and `mvlo-modloader`
 
 A standalone 2-10 player remake of the Mario vs Luigi gamemode from New Super Mario Bros DS. Play in the browser [here](https://ipodtouch0218.itch.io/nsmb-mariovsluigi).
+
+`mvlo-modloader` provides [a community modloader](https://github.com/vlcoo/MvLO-ModLoader) for MvLO and does not require `nsmb-mariovsluigi` to be installed.
+*(Note: To run windows-only mods, go to `Settings -> Advanced -> Extra args` and add `wine` for `.exe`)
 
 ### `times-new-argam`
 
