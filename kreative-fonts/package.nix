@@ -2,13 +2,17 @@
   lib,
   stdenv,
   fetchzip,
+  nerd-font-patcher,
+  makeNerdFont ? false,
 }:
 
 stdenv.mkDerivation rec {
-  pname = "kreative-kore-fonts";
+  pname = "kreative-kore-fonts${lib.optionalString makeNerdFont "-nerdfont"}";
   version = "2026-05-08";
 
   dontUnpack = true;
+
+  nativeBuildInputs = lib.optional makeNerdFont nerd-font-patcher;
 
   constructium = fetchzip {
     url = "https://github.com/kreativekorp/open-relay/releases/download/${version}/Constructium.zip";
@@ -41,6 +45,18 @@ stdenv.mkDerivation rec {
     cp $fairfax/*.ttf $FONT_DIR
     cp $fairfaxHD/*.ttf $FONT_DIR
     cp $kreativeSquare/*.ttf $FONT_DIR
+    runHook postInstall
+  '';
+
+  postInstall = lib.optionalString makeNerdFont ''
+    export HOME=$(mktemp -d)
+    TMP_PATCH_DIR=$(mktemp -d)
+    echo "Patching fonts with Nerd Font Patcher."
+    for font in $out/share/fonts/*.ttf; do
+      nerd-font-patcher -c --no-progressbars "$font" --out "$TMP_PATCH_DIR"
+    done
+    rm $out/share/fonts/*.ttf
+    mv "$TMP_PATCH_DIR"/*.ttf $out/share/fonts/
   '';
 
   meta = {

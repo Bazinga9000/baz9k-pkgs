@@ -55,6 +55,7 @@
                 includeNonMagicTemplates = true;
               };
               kreative-kore-fonts = pkgs.callPackage ./kreative-fonts/package.nix { };
+              kreative-kore-nerd-fonts = pkgs.callPackage ./kreative-fonts/package.nix { makeNerdFont = true; };
               cambridge = pkgs.callPackage ./cambridge/package.nix { };
               a-solitaire-mystery = pkgs.callPackage ./a-solitaire-mystery/package.nix { };
               microwave = pkgs.callPackage ./microwave/package.nix { };
