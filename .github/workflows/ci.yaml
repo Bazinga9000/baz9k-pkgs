@@ -1,0 +1,21 @@
+# Hook into nix-ci.yaml
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nix:
+    uses: ./.github/workflows/nix-ci.yaml
+    with:
+      exclude: |
+        a-solitaire-mystery # requires a proprietary file from itch.io
+        nsmb-mariovsluigi # no upstream license (assumed unfree)
+        times-new-argam # CC NC-BY 4.0, not buildable by CI

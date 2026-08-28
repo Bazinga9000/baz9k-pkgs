@@ -31,14 +31,6 @@ environment.systemPackages = [
 ];
 ```
 
-Most of this repository's packages are automatically built and cached daily with [Garnix](https://garnix.io/). To avoid local builds, add the following to your nix configuration (or append to your existing `substituters` and `trusted-public-keys` if they already exist):
-```nix
-nix.settings = {
-  substituters = [ "https://cache.garnix.io" ];
-  trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-};
-```
-
 ## List of packages
 ### `a-solitaire-mystery`
 
@@ -90,7 +82,7 @@ A font for displaying the [Argam](https://www.vincico.com/arqam/digits/argam-kin
 
 ### Package Mirrors
 
-This flake also contains mirrors of some packages with their own flakes to allow them to be cached into Garnix, updated daily directly from the most recent commit. These packages are:
+This flake also contains mirrors of some packages with their own flakes, updated every 2 hours from the most recent commit and tested with the CI. These packages are:
 
 - `uiua-git`: The [Uiua](https://www.uiua.org/) programming language, with all features enabled.
 - `noctalia-git-calendar`: The [Noctalia shell](https://noctalia.dev/), with calendar support enabled.
