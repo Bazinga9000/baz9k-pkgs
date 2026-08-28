@@ -53,8 +53,9 @@ stdenv.mkDerivation rec {
     TMP_PATCH_DIR=$(mktemp -d)
     echo "Patching fonts with Nerd Font Patcher."
     for font in $out/share/fonts/*.ttf; do
-      nerd-font-patcher -c --no-progressbars "$font" --out "$TMP_PATCH_DIR"
+      nerd-font-patcher -c --no-progressbars "$font" --out "$TMP_PATCH_DIR" &
     done
+    wait
     rm $out/share/fonts/*.ttf
     mv "$TMP_PATCH_DIR"/*.ttf $out/share/fonts/
   '';
