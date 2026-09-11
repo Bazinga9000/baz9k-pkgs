@@ -140,11 +140,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1789088558,
-        "narHash": "sha256-3ptguFs4oBRo0YHjfGstL3G4O++W5GTChFmaEyF7NQM=",
+        "lastModified": 1789093417,
+        "narHash": "sha256-pwWdazOpIOXIDlbtlopy3W8kYMIItVBPpqsyWQ/uK1M=",
         "owner": "uiua-lang",
         "repo": "uiua",
-        "rev": "8d10b45fb6cc476d783d39802f2e6914101b17f5",
+        "rev": "762c5ce49b4a3062ea42204969b1894aa124c12b",
         "type": "github"
       },
       "original": {
