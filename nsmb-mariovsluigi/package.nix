@@ -24,11 +24,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "nsmb-mariovsluigi";
-  version = "2.1.1.0";
+  version = "2.2.0.1";
 
   src = fetchzip {
     url = "https://github.com/ipodtouch0218/NSMB-MarioVsLuigi/releases/download/v${finalAttrs.version}/MarioVsLuigi-Linux-v${finalAttrs.version}.zip";
-    hash = "sha256-+bcE8L9anD15MI0jUWKcWt1mssn587+QQ3XU7T+F3Wo=";
+    hash = "sha256-8SSKvL7nPxoG72PUGFo8Msi9EMm8fFJg1iF3TrLqVTo=";
   };
 
   nativeBuildInputs = [
