@@ -9,15 +9,15 @@
   requireFile,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "a-solitaire-mystery";
-  version = "1.5.10";
+  version = "1.5.12b";
 
   src = requireFile {
     name = "ASM_linux.tar.gz";
     url = "https://hempuli.itch.io/a-solitaire-mystery";
     # Use `nix hash file --sri --type sha256` to get the correct hash
-    hash = "sha256-JovIuVKtVy4kQ8BRgb2YP+r64GpCeexZ4lDkDJ8Riho=";
+    hash = "sha256-DmktblfP8yAbz6j9Zz8hQE3sE6/A1yRXCqnIUMXa6q0=";
   };
 
   nativeBuildInputs = [
@@ -71,7 +71,7 @@ stdenv.mkDerivation rec {
     description = "A collection of 30 mysterious solitaires";
     homepage = "https://hempuli.itch.io/a-solitaire-mystery";
     license = lib.licenses.unfree;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = [ ];
     mainProgram = "ASM";
     platforms = lib.platforms.all;
   };
