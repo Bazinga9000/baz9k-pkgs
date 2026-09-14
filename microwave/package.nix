@@ -10,6 +10,7 @@
   libxcb,
   libXi,
   libxkbcommon,
+  wayland,
   stdenv,
   darwin,
   alsa-lib,
@@ -17,16 +18,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "microwave";
-  version = "0.38.0";
+  version = "0.39.0";
 
   src = fetchFromGitHub {
     owner = "Woyten";
     repo = "tune";
     rev = "microwave-${version}";
-    hash = "sha256-9o9R1spXHWHSJfbBvvRXGhZeePwOqrsXuHczHkfD1yA=";
+    hash = "sha256-Op7gnPE7PwjhczrxHDBYzxRozUG0QoeyhzzhoJKPmbs=";
   };
 
-  cargoHash = "sha256-fow6wkA0jViOWqPK1MNzOVOAdXmpdOJdlAf4g+ZnT5o=";
+  cargoHash = "sha256-BqE928YZvn+Jqg4ijx4wXDYBT+5K24v8WfdBy1zD2rk=";
 
   nativeBuildInputs = [
     pkg-config
@@ -35,28 +36,35 @@ rustPlatform.buildRustPackage rec {
 
   buildAndTestSubdir = "microwave";
 
+  # The midi::tests require a working ALSA sequencer, which isn't available in the build sandbox
+  checkFlags = [
+    "--skip"
+    "midi::tests"
+  ];
+
   buildInputs = [
     udev
     vulkan-loader
   ]
-  ++ lib.optionals stdenv.isDarwin [
+  ++ lib.optionals stdenv.hostPlatform.isDarwin [
     darwin.apple_sdk.frameworks.CoreAudio
     darwin.apple_sdk.frameworks.CoreGraphics
     darwin.apple_sdk.frameworks.IOKit
     darwin.apple_sdk.frameworks.Metal
     darwin.apple_sdk.frameworks.QuartzCore
   ]
-  ++ lib.optionals stdenv.isLinux [
+  ++ lib.optionals stdenv.hostPlatform.isLinux [
     alsa-lib
     libX11
     libXcursor
     libxcb
     libXi
     libxkbcommon
+    wayland
   ];
 
   # todo: figure out a better way to deal with the font dependency
-  postFixup = lib.optionalString stdenv.isLinux ''
+  postFixup = lib.optionalString stdenv.hostPlatform.isLinux ''
     mkdir -p $out/bin/assets
     cp ${./FiraSans-Regular.ttf} $out/bin/assets/FiraSans-Regular.ttf
 
@@ -66,6 +74,7 @@ rustPlatform.buildRustPackage rec {
           vulkan-loader
           libX11
           libxkbcommon
+          wayland
         ]
       }
   '';
@@ -74,7 +83,7 @@ rustPlatform.buildRustPackage rec {
     description = "Make xenharmonic music and create synthesizer tuning files for microtonal scales";
     homepage = "https://github.com/Woyten/tune/tree/main/microwave";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = [ ];
     mainProgram = "microwave";
   };
 }
