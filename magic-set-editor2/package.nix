@@ -16,13 +16,13 @@
 
 stdenv.mkDerivation rec {
   pname = "magic-set-editor2";
-  version = "2.5.8-unstable-2026-06-19";
+  version = "2.5.8-unstable-2026-09-11";
 
   src = fetchFromGitHub {
     owner = "G-e-n-e-v-e-n-s-i-S";
     repo = "MagicSetEditor2";
-    rev = "d9b58bb5eb666d53573e2c4eade5c485e7638179";
-    hash = "sha256-eL6+s0rItOy0ILISb8v5pdU3CFcr58+AriO6Q2fLArM=";
+    rev = "1f60b7099fd78bd4997fd01ecad7a4ab41f690dd";
+    hash = "sha256-F1txB6/917auktgPW5ZJN1O+MTQ60TPkhDrRKz0hhcE=";
   };
 
   # This has to be outside of applyPatches so we get set to the output's /share, not the source's
@@ -37,8 +37,8 @@ stdenv.mkDerivation rec {
   magic_pack = fetchFromGitHub {
     owner = "MagicSetEditorPacks";
     repo = "Full-Magic-Pack";
-    rev = "d5a825b6c08d5a9b092b54595a33a84facf49ae1";
-    hash = "sha256-oayMOVa2ksMsHWTFPA4XcBhBOKlmTFgnK1SlvnM00Yc=";
+    rev = "36620db499d33555bfa5c07730eb8befbb3b2383";
+    hash = "sha256-rpOfS+p9ybXEKf1EyfXnRh4xngpseuf0rD0thh3FKvo=";
   };
 
   non_magic_pack =
